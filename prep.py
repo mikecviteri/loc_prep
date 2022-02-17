@@ -24,22 +24,29 @@ audios = '/Users/miguelcampero/Desktop/Untitled/Audio Files'
 beep = '/Users/miguelcampero/Desktop/Untitled/Audio Files/Beep.wav'
 beep_duration = get_duration(beep)
 
+count = 1
+
+
+
+
+
 # SCRIPT
 for i in table['SIDE ID']:
-    count = 1
-
     file = os.path.join(audios, f'{str(i)}.wav')
     duration = get_duration(file)
 
     # 1
     shutil.copy(beep, os.path.join(save_paths[0], '01_{}_{}.wav'.format(str(count).zfill(2), str(i))))
-    # make_file('02_{}_{}.wav'.format(str(count).zfill(2), str(i)), beep_duration, save_paths[1])
     for j in range(1, 4):
-        print(j)
+        make_file('{}_{}_{}.wav'.format(str(j + 1).zfill(2), str(count).zfill(2), i), beep_duration, save_paths[j])
+    count += 1
 
+    # 2
+    shutil.copy(file, os.path.join(save_paths[0], '01_{}_{}.wav'.format(str(count).zfill(2), str(i))))
+    for j in range(1, 4):
+        make_file('{}_{}_{}.wav'.format(str(j + 1).zfill(2), str(count).zfill(2), i), duration, save_paths[j])
+    count += 1
 
-    # #2
-    # print(save_paths[1])
 
     # #3
     # print(save_paths[2])
@@ -56,7 +63,7 @@ for i in table['SIDE ID']:
     # #Silent audiofile
     # make_file(duration)
 
-    count += 1
+
 
     # BEEP 1
     # BEEP   >  SILENCIO AUDIO   >  SILENCIO BEEP  > SILENCIO AUDIO
