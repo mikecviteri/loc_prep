@@ -1,6 +1,7 @@
 import wave
 import contextlib
 from pydub import AudioSegment
+import os
 
 
 def get_duration(fname):
@@ -8,6 +9,10 @@ def get_duration(fname):
         frames = f.getnframes()
         rate = f.getframerate()
         duration = frames / float(rate)
-        return duration
-#
-# x = AudioSegment.silent(duration=1000)
+        return duration * 1000
+
+
+def make_file(name, dur, path):
+    file = AudioSegment.silent(duration=dur)
+    file.export(os.path.join(path, name), format="wav")
+
