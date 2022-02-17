@@ -2,6 +2,9 @@
 __pycache__/
 *.py[cod]
 *$py.class
+.DS_Store
+Audiofiles_0*
+Beep_0*
 
 # C extensions
 *.so
