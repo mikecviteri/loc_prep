@@ -14,11 +14,11 @@ def get_duration(fname):
 
 
 def make_file(name, dur, path):
-    file = AudioSegment.silent(duration=dur)
+    file = AudioSegment.silent(duration=dur, frame_rate=44100)
     file.export(os.path.join(path, name), format="wav")
 
 
-beep = '/Users/miguelcampero/Desktop/Untitled/Audio Files/Beep.wav'
+beep = os.path.expanduser("~/Documents/Session prep/Beep.wav")
 beep_duration = get_duration(beep)
 
 
