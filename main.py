@@ -7,6 +7,7 @@ fpath = os.path.expanduser("~/Documents/Session prep/")
 os.mkdir(fpath) if not os.path.exists(fpath) else None
 audios = fpath + 'Audio files'
 beep = fpath + 'Beep.wav'
+beep_duration = get_duration(beep)
 
 # Read csv files
 csv_file = fpath + 'Tracker_filtered.csv'
@@ -33,7 +34,7 @@ def run(timecode=0):
         characters.update({character: timecode}) if character not in characters.keys() else None
         audio_file = os.path.join(audios, f'{str(table.loc[elem, "SIDE ID"])}.wav')
         duration = get_duration(audio_file)
-        timecode += duration
+        timecode += (duration + beep_duration) * 2
 
         for n in range(0, 4):
             create_audios(table.loc[elem, 'SIDE ID'], duration,
@@ -49,13 +50,7 @@ def convert_ms(ms):
     return '{:03d}:{:02d}.{:03d}'.format(minutes, seconds, mms)
 
 
-def markers():
-    for elem in range(table.shape[0]):
-        print(table.loc[elem, 'SIDE ID'])
-
-
-if __name__ == '__main__':
-    chars = run()
+def markers(chars):
     mm_ss_ms = list(map(lambda x: convert_ms(x), chars.values()))
 
     for idx, char in enumerate(chars):
@@ -64,3 +59,8 @@ if __name__ == '__main__':
     with open(f'{fpath}markers.tsv', 'w') as f:
         for line, location in chars.items():
             print('{}\t{}'.format(line, location), file=f)
+
+
+if __name__ == '__main__':
+    all_chars = run()
+    markers(all_chars)
