@@ -5,23 +5,26 @@ import os
 import shutil
 
 
-def get_duration(fname):
-    with contextlib.closing(wave.open(fname, 'r')) as f:
+# Getting audio file duration
+def get_duration(f_name):
+    with contextlib.closing(wave.open(f_name, 'r')) as f:
         frames = f.getnframes()
         rate = f.getframerate()
         duration = frames / float(rate)
         return duration * 1000
 
 
+beep = os.path.expanduser("~/Documents/Session prep/Beep.wav")
+beep_duration = get_duration(beep)
+
+
+# Creating an empty audio wav file
 def make_file(name, dur, path):
     file = AudioSegment.silent(duration=dur, frame_rate=44100)
     file.export(os.path.join(path, name), format="wav")
 
 
-beep = os.path.expanduser("~/Documents/Session prep/Beep.wav")
-beep_duration = get_duration(beep)
-
-
+# Copying/creating the timeline for each file (4 folders)
 def create_audios(f_id, dur, file, folders, stop, number):
     for k in range(0, 4):
         if k != stop:
