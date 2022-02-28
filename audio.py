@@ -28,8 +28,10 @@ def make_file(name, dur, path):
 def create_audios(f_id, dur, file, folders, stop, number):
     for k in range(0, 4):
         if k != stop:
+            pass
             make_file('{}_{}_{}.wav'.format(str(k + 1).zfill(2), str(number).zfill(2), f_id),
                       beep_duration if file == beep else dur, folders[k])
         else:
-            shutil.copy(file, os.path.join(folders[k], '{}_{}_{}.wav'.
-                                           format(str(k + 1).zfill(2), str(number).zfill(2), str(f_id))))
+            result = AudioSegment.from_wav(file)
+            name = '{}_{}_{}.wav'.format(str(k + 1).zfill(2), str(number).zfill(2), str(f_id))
+            result.export(os.path.join(folders[k]) + '/' + name, format="wav")
