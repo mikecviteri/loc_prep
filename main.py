@@ -1,3 +1,5 @@
+#!/usr/local/bin/python
+
 import pandas as pd
 from audio import get_duration, create_audios
 import os

@@ -1,3 +1,5 @@
+#!/usr/local/bin/python
+
 import os
 import re
 
@@ -10,7 +12,7 @@ def rename(session_path):
         os.rename('{}/{}'.format(session_path, i), '{}/{}'.format(session_path, new_name))
 
 
-rename_path = '/Users/miguelcampero/Desktop/OPTIMIZED/Audio Files'
+rename_path = input('Copy full path of audio files to rename')
 
 if __name__ == '__main__':
     rename(rename_path)
