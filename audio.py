@@ -2,7 +2,6 @@ import wave
 import contextlib
 from pydub import AudioSegment
 import os
-import shutil
 
 
 # Getting audio file duration
@@ -28,7 +27,6 @@ def make_file(name, dur, path):
 def create_audios(f_id, dur, file, folders, stop, number):
     for k in range(0, 4):
         if k != stop:
-            pass
             make_file('{}_{}_{}.wav'.format(str(k + 1).zfill(2), str(number).zfill(2), f_id),
                       beep_duration if file == beep else dur, folders[k])
         else:
