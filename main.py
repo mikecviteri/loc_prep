@@ -3,6 +3,7 @@
 import pandas as pd
 from audio import get_duration, create_audios
 import os
+import shutil
 
 # Retrieve files from folder
 f_path = os.path.expanduser("~/Documents/Session prep/")
@@ -10,6 +11,7 @@ os.mkdir(f_path) if not os.path.exists(f_path) else None
 audios = f_path + 'Audio files'
 beep = f_path + 'Beep.wav'
 beep_duration = get_duration(beep)
+result_dir = f_path + 'Audio files_prep'
 
 # Read csv files
 csv_file = f_path + 'Tracker_filtered.csv'
@@ -25,6 +27,8 @@ for i in range(1, 3):
         path = os.path.join(f_path, '{}_0{}'.format(j, i))
         save_paths.append(path)
         os.mkdir(path) if not os.path.exists(path) else None
+
+os.mkdir(result_dir) if not os.path.exists(result_dir) else None
 
 
 # Converting sss to mmm:ss.sss
@@ -64,6 +68,13 @@ def run(time_code=0):
     return characters
 
 
+def move_folders():
+    for folder in save_paths:
+        shutil.move(folder, result_dir)
+    return None
+
+
 if __name__ == '__main__':
     all_chars = run()
     markers(all_chars)
+    move_folders()
