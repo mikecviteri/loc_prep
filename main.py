@@ -1,9 +1,10 @@
-#!/usr/local/bin/python
+#!/usr/local/bin/python3
 
 import pandas as pd
 from audio import get_duration, create_audios
 import os
 import shutil
+from delete import delete
 
 # Retrieve files from folder
 f_path = os.path.expanduser("~/Documents/Session prep/")
@@ -78,3 +79,4 @@ if __name__ == '__main__':
     all_chars = run()
     markers(all_chars)
     move_folders()
+    print('{} total audiofiles/rows'.format(len(table.index)))
