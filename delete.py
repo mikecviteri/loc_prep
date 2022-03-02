@@ -1,8 +1,10 @@
+#!/usr/local/bin/python
+
 import shutil
 import os
 
 # Files to be deleted
-lst = ['Audio_files_01', 'Audio_files_02', 'Beep_01', 'Beep_02', 'markers.mid', 'markers.tsv']
+lst = ['Audio files_prep', 'Audio_files_01', 'Audio_files_02', 'Beep_01', 'Beep_02', 'markers.mid', 'markers.tsv']
 path = os.path.expanduser("~/Documents/Session prep/")
 
 

@@ -25,11 +25,12 @@ def make_file(name, dur, path):
 
 # Copying/creating the timeline for each file (4 folders)
 def create_audios(f_id, dur, file, folders, stop, number):
+    values = {0: 'b1', 1: 'a1', 2: 'b2', 3: 'a2'}
     for k in range(0, 4):
         if k != stop:
-            make_file('{}_{}_{}.wav'.format(str(k + 1).zfill(2), str(number).zfill(2), f_id),
+            make_file('{}_{}_{}_{}.wav'.format(str(k + 1).zfill(2), values[k], str(number).zfill(2), f_id),
                       beep_duration if file == beep else dur, folders[k])
         else:
             result = AudioSegment.from_wav(file)
-            name = '{}_{}_{}.wav'.format(str(k + 1).zfill(2), str(number).zfill(2), str(f_id))
+            name = '{}_{}_{}_{}.wav'.format(str(k + 1).zfill(2), values[k], str(number).zfill(2), str(f_id))
             result.export(os.path.join(folders[k]) + '/' + name, format="wav")

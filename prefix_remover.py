@@ -3,7 +3,7 @@
 import os
 import re
 
-pattern = re.compile(r'[\d]._')
+pattern = re.compile(r'[\d]._.*_')
 
 
 def rename(session_path):
