@@ -8,7 +8,7 @@ pattern = re.compile(r'[\d]._.*_')
 
 def rename(session_path):
     for i in os.listdir(session_path):
-        new_name = 'Beep.wav' if i.startswith('01_01_') else re.sub(pattern, "", i)
+        new_name = 'Beep.wav' if i.startswith('01_b1_01_') else re.sub(pattern, "", i)
         os.rename('{}/{}'.format(session_path, i), '{}/{}'.format(session_path, new_name))
 
 
