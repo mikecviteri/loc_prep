@@ -5,7 +5,6 @@ from audio import get_duration, create_audios
 import os
 import shutil
 
-
 # Retrieve files from folder
 f_path = os.path.expanduser("~/Documents/Session prep/")
 os.mkdir(f_path) if not os.path.exists(f_path) else None
@@ -22,6 +21,7 @@ table = pd.read_csv(csv_file, low_memory=False)
 dirs = ['Beep', 'Audio_files']
 save_paths = []
 characters = {}
+char_lines = {}
 
 for i in range(1, 3):
     for j in dirs:
@@ -75,9 +75,20 @@ def move_folders():
     return None
 
 
+def info():
+    counter = '\n{:^64s}\n{:^64s}\n{:^64s}\n'.format('*' * 24, str(len(table.index)) + ' total audiofiles/rows',
+                                                     '*' * 24)
+    print(counter)
+
+    unique_chars = table['Character'].value_counts().index.tolist()
+
+    for idx, value in enumerate(table['Character'].value_counts()):
+        print('{:^64s}'.format('* ' + unique_chars[idx] + ' --- ' + str(value) + ' lines\n'))
+    
+    print(f'\nSaved to: {result_dir}\n\n')
+
 if __name__ == '__main__':
     all_chars = run()
     markers(all_chars)
     move_folders()
-    counter = '\n{:^64s}\n{:^64s}\n{:^64s}\n'.format('*'*24, str(len(table.index)) + ' total audiofiles/rows', '*'*24)
-    print(counter)
+    info()
